@@ -1,0 +1,369 @@
+﻿<Window x:Class="Graphviz4Net.WPF.TreeVisualization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:i="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:Controls="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions" 
+        xmlns:TreeVisualization="clr-namespace:Graphviz4Net.WPF.TreeVisualization" 
+        xmlns:WPF="clr-namespace:Graphviz4Net.WPF;assembly=Graphviz4Net.WPF" 
+        xmlns:ViewModels="clr-namespace:Graphviz4Net.WPF.ViewModels;assembly=Graphviz4Net.WPF" 
+        xmlns:CoreAI="clr-namespace:FullSailAFI.GamePlaying.CoreAI;assembly=FullSailAFI.GamePlaying.CoreAI" 
+        Title="Minimax tree visualization with Graphiz4Net and WPF" 
+        Height="{Binding WindowHeight, Mode=OneWayToSource}" 
+        Width="{Binding WindowWidth, Mode=OneWayToSource}"
+        KeyDown="Window_KeyDown">
+    <Window.Resources>
+        <TreeVisualization:BoolToStringConverter
+            x:Key="boolToYesNoConverter" FalseValue="No" TrueValue="Yes" />
+        <TreeVisualization:BoolToStringConverter
+            x:Key="boolToRunningColorConverter" FalseValue="Crimson" TrueValue="DarkGoldenrod" />
+        <TreeVisualization:EnumToBooleanConverter
+            x:Key="enumConverter" />
+
+        <DataTemplate DataType="{x:Type CoreAI:NodeRegular}">
+            <Border Padding="2" CornerRadius="5" Background="White" 
+                    BorderBrush="{Binding NodeHighlightColor}"
+                    BorderThickness="{Binding NodeHighlightBorderSize}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding NodePlayer, StringFormat=Curr: {0}}"/>
+                    <TextBlock Text="{Binding NodeNextPlayer, StringFormat=Next: {0}}"/>
+                    <TextBlock Text="{Binding NodeRow, StringFormat=Row: {0}}"/>
+                    <TextBlock Text="{Binding NodeColumn, StringFormat=Col: {0}}"/>
+                    <TextBlock Name="Rank" Text="{Binding NodeRank, StringFormat=Rank: {0}}"/>
+                    <!-- sneaky truncation of double above -->
+                    <TextBlock Text="{Binding NodeId, StringFormat=ID: {0}}"/>
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="True">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="LightGray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="False">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="White"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type CoreAI:NodeMcts}">
+            <Border Padding="2" CornerRadius="5" Background="White" 
+                    BorderBrush="{Binding NodeHighlightColor}"
+                    BorderThickness="{Binding NodeHighlightBorderSize}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding NodePlayer, StringFormat=Curr: {0}}"/>
+                    <TextBlock Text="{Binding NodeNextPlayer, StringFormat=Next: {0}}"/>
+                    <TextBlock Text="{Binding NodeRow, StringFormat=Row: {0}}"/>
+                    <TextBlock Text="{Binding NodeColumn, StringFormat=Col: {0}}"/>
+                    <TextBlock Name="Rank" Text="{Binding NodeRank, StringFormat=W Wins: {0:0.00}%}"/>
+                    <TextBlock Text="{Binding NodeId, StringFormat=ID: {0}}"/>
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="True">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="LightGray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="False">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="White"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type CoreAI:NodeAlphaBeta}">
+            <Border Padding="2" CornerRadius="5" Background="White" 
+                    BorderBrush="{Binding NodeHighlightColor}"
+                    BorderThickness="{Binding NodeHighlightBorderSize}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding NodePlayer, StringFormat=Curr: {0}}"/>
+                    <TextBlock Text="{Binding NodeNextPlayer, StringFormat=Next: {0}}"/>
+                    <TextBlock Text="{Binding NodeRow, StringFormat=Row: {0}}"/>
+                    <TextBlock Text="{Binding NodeColumn, StringFormat=Col: {0}}"/>
+                    <TextBlock Name="Rank" Text="{Binding NodeRank, StringFormat=Rank: {0}}"/>
+                    <!-- sneaky truncation of double above -->
+                    <TextBlock Name="Alpha" Text="{Binding NodeAlpha, StringFormat=Alpha: {0}}">
+                    <!-- sneaky truncation of double above -->
+                    </TextBlock>
+                    <TextBlock Name="Beta" Text="{Binding NodeBeta, StringFormat=Beta: {0}}">
+                    <!-- sneaky truncation of double above -->
+                    </TextBlock>
+                    <TextBlock Text="{Binding NodeId, StringFormat=ID: {0}}"/>
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="True">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="LightGray"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasRankHighlight}" Value="False">
+                    <Setter TargetName="Rank" Property="TextBlock.Background" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasAlphaHighlight}" Value="True">
+                    <Setter TargetName="Alpha" Property="TextBlock.Background" Value="LightPink"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasAlphaHighlight}" Value="False">
+                    <Setter TargetName="Alpha" Property="TextBlock.Background" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasBetaHighlight}" Value="True">
+                    <Setter TargetName="Beta" Property="TextBlock.Background" Value="LightBlue"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasBetaHighlight}" Value="False">
+                    <Setter TargetName="Beta" Property="TextBlock.Background" Value="White"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasAlphaStrikethrough}" Value="True">
+                    <Setter TargetName="Alpha" Property="TextBlock.TextDecorations" Value="Strikethrough" />
+                    <Setter TargetName="Alpha" Property="TextBlock.Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasAlphaStrikethrough}" Value="False">
+                    <Setter TargetName="Alpha" Property="TextBlock.TextDecorations" Value="None" />
+                    <Setter TargetName="Alpha" Property="TextBlock.Foreground" Value="Black"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasBetaStrikethrough}" Value="True">
+                    <Setter TargetName="Beta" Property="TextBlock.TextDecorations" Value="Strikethrough" />
+                    <Setter TargetName="Beta" Property="TextBlock.Foreground" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding NodeHasBetaStrikethrough}" Value="False">
+                    <Setter TargetName="Beta" Property="TextBlock.TextDecorations" Value="None" />
+                    <Setter TargetName="Beta" Property="TextBlock.Foreground" Value="Black"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type CoreAI:NodeAlphaBetaPruned}">
+            <Border Padding="2" CornerRadius="5" Background="Gainsboro" 
+                    BorderBrush="{Binding NodeHighlightColor}"
+                    BorderThickness="{Binding NodeHighlightBorderSize}">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding NodePlayer, StringFormat=Curr: {0}}"/>
+                    <TextBlock Text="{Binding NodeNextPlayer, StringFormat=Next: {0}}"/>
+                    <TextBlock Text="{Binding NodeRow, StringFormat=Row: {0}}"/>
+                    <TextBlock Text="{Binding NodeColumn, StringFormat=Col: {0}}"/>
+                    <TextBlock Text="{Binding NodeId, StringFormat=ID: {0}}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="RadioButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border Name="radioButtonBorder" CornerRadius="5" Background="Silver" BorderThickness="1" BorderBrush="Black">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="radioButtonBorder" Property="Background" Value="WhiteSmoke" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="radioButtonBorder" Property="Background" Value="Gray" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <!-- used for all textboxes, so will have universal error handling -->
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, 
+                            Path=(Validation.Errors)[0].ErrorContent}">
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate DataType="{x:Type ViewModels:EdgeArrowLabelViewModel}">
+            <TextBlock Text="{Binding Path=Label}" Background="White"/>
+        </DataTemplate>
+
+        <!-- Set UseContentPresenterForAllElements of GraphLayout to true -->
+        <DataTemplate DataType="{x:Type ViewModels:EdgeViewModel}">
+            <Path Data="{Binding Data}"
+                  Stroke="{Binding Edge.Destination.NodeParentEdgeColor}"
+                  StrokeThickness="2" ToolTip="{Binding Edge.Label}"/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type ViewModels:EdgeLabelViewModel}">
+            <StackPanel>
+                <TextBlock Text="{Binding Edge.Destination.NodeMinMax}" FontFamily="Comic Sans MS"
+                           Foreground="{Binding Edge.Destination.NodeParentEdgeColor}"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type TreeVisualization:Arrow}">
+            <!-- just drawing straight line as "arrow" at end -->
+            <!-- why do this? if you don't, the framework will anyway, and you can't control it then *rolls eyes* -->
+            <Path Data="M 0,0 L 0,10"
+                  Stroke="{Binding EdgeColor}" StrokeThickness="2">
+            </Path>
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Grid>  
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="99" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95" />  <!-- To make room for the zoom control, which we can't control
+                                                  wbecause WPF Extensions is loaded as DLL, not project -->
+            <ColumnDefinition Width="234" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Main graph and zoom controls -->
+        
+        <Controls:ZoomControl Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3">
+            <WPF:GraphLayout 
+                UseContentPresenterForAllElements="True"
+                LogGraphvizOutput="True"
+                Graph="{Binding TreeGraph}"
+                x:Name="GraphLayout">
+                <WPF:GraphLayout.Resources>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ProgressBar">
+                                    <TextBlock Foreground="Black">Generating the layout...</TextBlock>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </WPF:GraphLayout.Resources>
+            </WPF:GraphLayout>
+        </Controls:ZoomControl>
+
+        <!-- Mode buttons -->
+        
+        <Border CornerRadius="5" Background="#88C0C0C0" Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Vertical" Margin="7">
+                <StackPanel Orientation="Horizontal" Margin="0">
+                    <StackPanel Margin="0, 0, 5, 0">
+                        <RadioButton Name="SingleStepButton" GroupName="Mode"
+                                Height="40" Width="40" Padding="4" DockPanel.Dock="Top"
+                                ToolTipService.ShowOnDisabled="True"
+                                IsEnabled="{Binding Path=IsRunning}"
+                                Style="{StaticResource RadioButtonStyle}"
+                                IsChecked="{Binding Path=TreeVisualizationMode, Mode=TwoWay, 
+                                Converter={StaticResource enumConverter},
+                                ConverterParameter={x:Static TreeVisualization:VisualizationMode.SingleStep}}">
+                            <ToggleButton.Content>
+                                <Image Source="../icons/play_pause.png" Stretch="UniformToFill" />
+                            </ToggleButton.Content>
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Single Step</TextBlock>
+                                        <TextBlock>Moves visualization forward one command.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                    <StackPanel Margin="0, 0, 5, 0">
+                        <RadioButton Name="PauseButton" GroupName="Mode"
+                                Height="40" Width="40" Padding="4" DockPanel.Dock="Top"
+                                ToolTipService.ShowOnDisabled="True"
+                                IsEnabled="{Binding Path=IsRunning}"
+                                Style="{StaticResource RadioButtonStyle}"
+                                IsChecked="{Binding Path=TreeVisualizationMode, Mode=TwoWay, 
+                                Converter={StaticResource enumConverter},
+                                ConverterParameter={x:Static TreeVisualization:VisualizationMode.Pause}}">
+                            <ToggleButton.Content>
+                                <Image Source="../icons/pause.png" Stretch="UniformToFill" />
+                            </ToggleButton.Content>
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Pause</TextBlock>
+                                        <TextBlock>Pauses visualization.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                    <StackPanel Margin="0, 0, 5, 0">
+                        <RadioButton Name="StepByStepButton" GroupName="Mode"
+                                Height="40" Width="40" Padding="4" DockPanel.Dock="Top"
+                                ToolTipService.ShowOnDisabled="True"
+                                IsEnabled="{Binding Path=IsRunning}"
+                                Style="{StaticResource RadioButtonStyle}"
+                                IsChecked="{Binding Path=TreeVisualizationMode, Mode=TwoWay, 
+                                Converter={StaticResource enumConverter},
+                                ConverterParameter={x:Static TreeVisualization:VisualizationMode.StepByStep}}">
+                            <ToggleButton.Content>
+                                <Image Source="../icons/play.png" Stretch="UniformToFill" />
+                            </ToggleButton.Content>
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Step-By-Step</TextBlock>
+                                        <TextBlock>Moves visualization forward one command at a regular rate.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                    <StackPanel Margin="0, 0, 5, 0">
+                        <RadioButton Name="FastForwardButton" GroupName="Mode"
+                                Height="40" Width="40" Padding="4" DockPanel.Dock="Top"
+                                ToolTipService.ShowOnDisabled="True"
+                                IsEnabled="{Binding Path=IsRunning}"
+                                Style="{StaticResource RadioButtonStyle}"
+                                IsChecked="{Binding Path=TreeVisualizationMode, Mode=TwoWay, 
+                                Converter={StaticResource enumConverter},
+                                ConverterParameter={x:Static TreeVisualization:VisualizationMode.FastForward}}">
+                            <ToggleButton.Content>
+                                <Image Source="../icons/play_fastforward.png" Stretch="UniformToFill" />
+                            </ToggleButton.Content>
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Fast Forward</TextBlock>
+                                        <TextBlock>Moves visualization forward at max speed.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                    <StackPanel Margin="0, 0, 0, 0">
+                        <RadioButton Name="EndButton" GroupName="Mode"
+                                Height="40" Width="40" Padding="4" DockPanel.Dock="Top"
+                                ToolTipService.ShowOnDisabled="True"
+                                IsEnabled="{Binding Path=IsRunning}"
+                                Style="{StaticResource RadioButtonStyle}"
+                                IsChecked="{Binding Path=TreeVisualizationMode, Mode=TwoWay, 
+                                Converter={StaticResource enumConverter},
+                                ConverterParameter={x:Static TreeVisualization:VisualizationMode.SkipToEnd}}">
+                            <ToggleButton.Content>
+                                <Image Source="../icons/play_end.png" Stretch="UniformToFill" />
+                            </ToggleButton.Content>
+                            <RadioButton.ToolTip>
+                                <ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold">Skip To End</TextBlock>
+                                        <TextBlock>Moves visualization forward at max speed without rendering.<LineBreak/>
+                                                   Rendering will happen once at the end.</TextBlock>
+                                    </StackPanel>
+                                </ToolTip>
+                            </RadioButton.ToolTip>
+                        </RadioButton>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" Margin="0, 6, 0, 0">Step-By-Step rate:</TextBlock>
+                    <TextBox Margin="6, 6, 3, 0"
+                             Text="{Binding StepByStepRateString, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                             TextAlignment="Right" Width="50"/>
+                    <TextBlock FontWeight="Bold" Margin="0, 6, 0, 0">(ms)</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontWeight="Bold" Margin="0, 6, 0, 0">Visualization running?</TextBlock>
+                    <TextBlock FontWeight="Bold" Margin="10, 6, 0, 0"
+                               Foreground="{Binding Path=IsRunning, Converter={StaticResource boolToRunningColorConverter}}" 
+                               Text="{Binding Path=IsRunning, Converter={StaticResource boolToYesNoConverter}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

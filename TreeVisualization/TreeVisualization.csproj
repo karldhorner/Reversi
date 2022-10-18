@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F820EB5A-BBFD-46AD-9EEB-3DFE8D1D7BE7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Graphviz4Net.WPF.TreeVisualization</RootNamespace>
+    <AssemblyName>Graphviz4Net.WPF.TreeVisualization</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WPFExtensions">
+      <HintPath>.\WPFExtensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BoolToValueConverter.cs" />
+    <Compile Include="EnumToBooleanConverter.cs" />
+    <Compile Include="Settings.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Graphviz238\bin\config6" />
+    <None Include="Graphviz238\bin\Graphviz.ini" />
+    <None Include="Graphviz238\bin\Settings.ini" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-autohint.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-no-sub-pixel.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-sub-pixel-bgr.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-sub-pixel-rgb.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-sub-pixel-vbgr.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-sub-pixel-vrgb.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\10-unhinted.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\20-fix-globaladvance.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\20-lohit-gujarati.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\20-unhint-small-vera.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\30-amt-aliases.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\30-urw-aliases.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\40-generic.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\49-sansserif.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\50-user.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\51-local.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\60-latin.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\65-fonts-persian.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\65-nonlatin.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\69-unifont.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\70-no-bitmaps.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\70-yes-bitmaps.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\80-delicious.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\90-synthetic.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.avail\README" />
+    <None Include="Graphviz238\etc\fonts\conf.d\20-fix-globaladvance.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\20-lohit-gujarati.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\20-unhint-small-vera.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\30-amt-aliases.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\30-urw-aliases.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\40-generic.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\49-sansserif.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\50-user.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\51-local.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\60-latin.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\65-fonts-persian.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\65-nonlatin.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\69-unifont.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\80-delicious.conf" />
+    <None Include="Graphviz238\etc\fonts\conf.d\90-synthetic.conf" />
+    <None Include="Graphviz238\etc\fonts\fonts.conf" />
+    <None Include="Graphviz238\etc\fonts\fonts.dtd" />
+    <None Include="Graphviz238\etc\gtk-2.0\gdk-pixbuf.loaders" />
+    <None Include="Graphviz238\etc\gtk-2.0\gtk.immodules" />
+    <None Include="Graphviz238\etc\gtk-2.0\gtkrc" />
+    <None Include="Graphviz238\fonts\conf.avail\10-autohint.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-no-sub-pixel.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-sub-pixel-bgr.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-sub-pixel-rgb.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-sub-pixel-vbgr.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-sub-pixel-vrgb.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\10-unhinted.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\20-fix-globaladvance.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\20-lohit-gujarati.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\20-unhint-small-vera.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\30-amt-aliases.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\30-urw-aliases.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\40-generic.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\49-sansserif.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\50-user.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\51-local.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\60-latin.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\65-fonts-persian.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\65-nonlatin.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\69-unifont.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\70-no-bitmaps.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\70-yes-bitmaps.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\80-delicious.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\90-synthetic.conf" />
+    <None Include="Graphviz238\fonts\conf.avail\README" />
+    <None Include="Graphviz238\fonts\conf.d\20-fix-globaladvance.conf" />
+    <None Include="Graphviz238\fonts\conf.d\20-lohit-gujarati.conf" />
+    <None Include="Graphviz238\fonts\conf.d\20-unhint-small-vera.conf" />
+    <None Include="Graphviz238\fonts\conf.d\30-amt-aliases.conf" />
+    <None Include="Graphviz238\fonts\conf.d\30-urw-aliases.conf" />
+    <None Include="Graphviz238\fonts\conf.d\40-generic.conf" />
+    <None Include="Graphviz238\fonts\conf.d\49-sansserif.conf" />
+    <None Include="Graphviz238\fonts\conf.d\50-user.conf" />
+    <None Include="Graphviz238\fonts\conf.d\51-local.conf" />
+    <None Include="Graphviz238\fonts\conf.d\60-latin.conf" />
+    <None Include="Graphviz238\fonts\conf.d\65-fonts-persian.conf" />
+    <None Include="Graphviz238\fonts\conf.d\65-nonlatin.conf" />
+    <None Include="Graphviz238\fonts\conf.d\69-unifont.conf" />
+    <None Include="Graphviz238\fonts\conf.d\80-delicious.conf" />
+    <None Include="Graphviz238\fonts\conf.d\90-synthetic.conf" />
+    <None Include="Graphviz238\fonts\fonts.conf" />
+    <None Include="Graphviz238\fonts\fonts.dtd" />
+    <None Include="Graphviz238\gtk-2.0\gdk-pixbuf.loaders" />
+    <None Include="Graphviz238\gtk-2.0\gtk.immodules" />
+    <None Include="Graphviz238\gtk-2.0\gtkrc" />
+    <None Include="Graphviz238\lib\debug\lib\ast.lib" />
+    <None Include="Graphviz238\lib\debug\lib\cdt.lib" />
+    <None Include="Graphviz238\lib\debug\lib\cgraph.lib" />
+    <None Include="Graphviz238\lib\debug\lib\circogen.lib" />
+    <None Include="Graphviz238\lib\debug\lib\dot.lib" />
+    <None Include="Graphviz238\lib\debug\lib\dotgen.lib" />
+    <None Include="Graphviz238\lib\debug\lib\expr.lib" />
+    <None Include="Graphviz238\lib\debug\lib\fdpgen.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gd.lib" />
+    <None Include="Graphviz238\lib\debug\lib\graph.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gts.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvc.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvortho.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvpack.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_core.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_dot_layout.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_gd.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_gdiplus.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_neato_layout.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvplugin_pango.lib" />
+    <None Include="Graphviz238\lib\debug\lib\gvprlib.lib" />
+    <None Include="Graphviz238\lib\debug\lib\ingraphs.lib" />
+    <None Include="Graphviz238\lib\debug\lib\minglelib.lib" />
+    <None Include="Graphviz238\lib\debug\lib\neatogen.lib" />
+    <None Include="Graphviz238\lib\debug\lib\osage.lib" />
+    <None Include="Graphviz238\lib\debug\lib\patchwork.lib" />
+    <None Include="Graphviz238\lib\debug\lib\Pathplan.lib" />
+    <None Include="Graphviz238\lib\debug\lib\rbtree.lib" />
+    <None Include="Graphviz238\lib\debug\lib\sfdp.lib" />
+    <None Include="Graphviz238\lib\debug\lib\sfio.lib" />
+    <None Include="Graphviz238\lib\debug\lib\sparse.lib" />
+    <None Include="Graphviz238\lib\debug\lib\topfish.lib" />
+    <None Include="Graphviz238\lib\debug\lib\twopigen.lib" />
+    <None Include="Graphviz238\lib\debug\lib\vmalloc.lib" />
+    <None Include="Graphviz238\lib\debug\lib\vpsc.lib" />
+    <None Include="Graphviz238\lib\debug\lib\xdot.lib" />
+    <None Include="Graphviz238\lib\lefty\box.lefty" />
+    <None Include="Graphviz238\lib\lefty\def.lefty" />
+    <None Include="Graphviz238\lib\lefty\dotty.lefty" />
+    <None Include="Graphviz238\lib\lefty\dotty_draw.lefty" />
+    <None Include="Graphviz238\lib\lefty\dotty_edit.lefty" />
+    <None Include="Graphviz238\lib\lefty\dotty_layout.lefty" />
+    <None Include="Graphviz238\lib\lefty\dotty_ui.lefty" />
+    <None Include="Graphviz238\lib\lefty\fractal.lefty" />
+    <None Include="Graphviz238\lib\lefty\fractal2.lefty" />
+    <None Include="Graphviz238\lib\lefty\lefty.psp" />
+    <None Include="Graphviz238\lib\lefty\slides.lefty" />
+    <None Include="Graphviz238\lib\lefty\tree.lefty" />
+    <None Include="Graphviz238\lib\pkgconfig\libcdt.pc" />
+    <None Include="Graphviz238\lib\pkgconfig\libcgraph.pc" />
+    <None Include="Graphviz238\lib\pkgconfig\libgraph.pc" />
+    <None Include="Graphviz238\lib\pkgconfig\libgvc.pc" />
+    <None Include="Graphviz238\lib\pkgconfig\libpathplan.pc" />
+    <None Include="Graphviz238\lib\release\lib\ast.lib" />
+    <None Include="Graphviz238\lib\release\lib\cdt.lib" />
+    <None Include="Graphviz238\lib\release\lib\cgraph.lib" />
+    <None Include="Graphviz238\lib\release\lib\circogen.lib" />
+    <None Include="Graphviz238\lib\release\lib\dot.lib" />
+    <None Include="Graphviz238\lib\release\lib\dotgen.lib" />
+    <None Include="Graphviz238\lib\release\lib\expr.lib" />
+    <None Include="Graphviz238\lib\release\lib\fdpgen.lib" />
+    <None Include="Graphviz238\lib\release\lib\gd.lib" />
+    <None Include="Graphviz238\lib\release\lib\graph.lib" />
+    <None Include="Graphviz238\lib\release\lib\gts.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvc.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvortho.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvpack.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_core.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_dot_layout.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_gd.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_gdiplus.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_neato_layout.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvplugin_pango.lib" />
+    <None Include="Graphviz238\lib\release\lib\gvprlib.lib" />
+    <None Include="Graphviz238\lib\release\lib\ingraphs.lib" />
+    <None Include="Graphviz238\lib\release\lib\minglelib.lib" />
+    <None Include="Graphviz238\lib\release\lib\neatogen.lib" />
+    <None Include="Graphviz238\lib\release\lib\osage.lib" />
+    <None Include="Graphviz238\lib\release\lib\patchwork.lib" />
+    <None Include="Graphviz238\lib\release\lib\Pathplan.lib" />
+    <None Include="Graphviz238\lib\release\lib\rbtree.lib" />
+    <None Include="Graphviz238\lib\release\lib\sfdp.lib" />
+    <None Include="Graphviz238\lib\release\lib\sfio.lib" />
+    <None Include="Graphviz238\lib\release\lib\sparse.lib" />
+    <None Include="Graphviz238\lib\release\lib\topfish.lib" />
+    <None Include="Graphviz238\lib\release\lib\twopigen.lib" />
+    <None Include="Graphviz238\lib\release\lib\vmalloc.lib" />
+    <None Include="Graphviz238\lib\release\lib\vpsc.lib" />
+    <None Include="Graphviz238\lib\release\lib\xdot.lib" />
+    <None Include="Graphviz238\pango\pango.aliases" />
+    <None Include="Graphviz238\pango\pango.modules" />
+    <Resource Include="Graphviz238\share\fonts\FreeSans.ttf" />
+    <None Include="Graphviz238\share\graphviz\doc\AUTHORS" />
+    <None Include="Graphviz238\share\graphviz\doc\ChangeLog" />
+    <None Include="Graphviz238\share\graphviz\doc\COPYING" />
+    <None Include="Graphviz238\share\graphviz\doc\Dot.ref" />
+    <None Include="Graphviz238\share\graphviz\doc\html\info\html2.dot" />
+    <None Include="Graphviz238\share\graphviz\doc\html\info\html3.dot" />
+    <None Include="Graphviz238\share\graphviz\doc\html\info\html4.dot" />
+    <None Include="Graphviz238\share\graphviz\doc\html\info\Thumbs.db" />
+    <None Include="Graphviz238\share\graphviz\doc\NEWS" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\acyclic.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\bcomps.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\ccomps.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\cdt.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\cgraph.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\circo.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\dijkstra.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\dot.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\dotguide.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\dotty.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\dottyguide.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\fdp.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gc.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\graph.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gv2gxl.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gvc.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gvcolor.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gvgen.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gvpack.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gvpr.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\gxl2gv.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\lefty.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\leftyguide.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\libguide.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\lneato.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\mm2gv.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\neato.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\neatoguide.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\nop.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\osage.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\pathplan.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\prune.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\sccmap.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\tred.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\twopi.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\unflatten.1.pdf" />
+    <None Include="Graphviz238\share\graphviz\doc\pdf\xdot.3.pdf" />
+    <None Include="Graphviz238\share\graphviz\examples\4elt.gv" />
+    <None Include="Graphviz238\share\graphviz\examples\world.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\abstract.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\alf.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\arrows.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\awilliams.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust1.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust2.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust3.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust4.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\clust5.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\crazy.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\ctext.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\dfa.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\fig6.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\fsm.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\grammar.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\hashtable.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\honda-tokoro.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\jcctree.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\jsort.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\KW91.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\Latin1.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\ldbxtried.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\longflat.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\mike.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\NaN.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\nhg.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\oldarrows.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\pgram.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\pm2way.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\pmpipe.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\polypoly.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\proc3d.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\psfonttest.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\record2.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\records.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\rowe.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\russian.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\sdh.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\shells.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\states.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\structs.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\switch.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\table.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\train11.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\trapeziumlr.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\tree.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\triedds.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\try.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\unix.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\unix2.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\viewfile.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\directed\world.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\smyrna\4elt.dot" />
+    <None Include="Graphviz238\share\graphviz\graphs\smyrna\world.dot" />
+    <None Include="Graphviz238\share\graphviz\graphs\undirected\ER.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\undirected\Heawood.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\undirected\ngk10_4.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\undirected\Petersen.gv" />
+    <None Include="Graphviz238\share\graphviz\graphs\undirected\process.gv" />
+    <None Include="Graphviz238\share\graphviz\lefty\box.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\def.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\dotty.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\dotty_draw.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\dotty_edit.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\dotty_layout.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\dotty_ui.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\fractal.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\fractal2.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\lefty.psp" />
+    <None Include="Graphviz238\share\graphviz\lefty\slides.lefty" />
+    <None Include="Graphviz238\share\graphviz\lefty\tree.lefty" />
+    <None Include="Graphviz238\share\graphviz\smyrna\attr_widgets.dot" />
+    <None Include="Graphviz238\share\graphviz\smyrna\smyrna.glade" />
+    <None Include="Graphviz238\share\graphviz\smyrna\template.dot" />
+    <None Include="Graphviz238\share\license.rtf" />
+    <None Include="Graphviz238\share\man\man1\acyclic.1" />
+    <None Include="Graphviz238\share\man\man1\bcomps.1" />
+    <None Include="Graphviz238\share\man\man1\ccomps.1" />
+    <None Include="Graphviz238\share\man\man1\circo.1" />
+    <None Include="Graphviz238\share\man\man1\dijkstra.1" />
+    <None Include="Graphviz238\share\man\man1\dot.1" />
+    <None Include="Graphviz238\share\man\man1\dotty.1" />
+    <None Include="Graphviz238\share\man\man1\fdp.1" />
+    <None Include="Graphviz238\share\man\man1\gc.1" />
+    <None Include="Graphviz238\share\man\man1\gv2gxl.1" />
+    <None Include="Graphviz238\share\man\man1\gvcolor.1" />
+    <None Include="Graphviz238\share\man\man1\gvgen.1" />
+    <None Include="Graphviz238\share\man\man1\gvpack.1" />
+    <None Include="Graphviz238\share\man\man1\gvpr.1" />
+    <None Include="Graphviz238\share\man\man1\gxl2gv.1" />
+    <None Include="Graphviz238\share\man\man1\lefty.1" />
+    <None Include="Graphviz238\share\man\man1\lneato.1" />
+    <None Include="Graphviz238\share\man\man1\mm2gv.1" />
+    <None Include="Graphviz238\share\man\man1\neato.1" />
+    <None Include="Graphviz238\share\man\man1\nop.1" />
+    <None Include="Graphviz238\share\man\man1\osage.1" />
+    <None Include="Graphviz238\share\man\man1\prune.1" />
+    <None Include="Graphviz238\share\man\man1\sccmap.1" />
+    <None Include="Graphviz238\share\man\man1\tred.1" />
+    <None Include="Graphviz238\share\man\man1\twopi.1" />
+    <None Include="Graphviz238\share\man\man1\unflatten.1" />
+    <None Include="Graphviz238\share\man\man3\cdt.3" />
+    <None Include="Graphviz238\share\man\man3\cgraph.3" />
+    <None Include="Graphviz238\share\man\man3\graph.3" />
+    <None Include="Graphviz238\share\man\man3\gvc.3" />
+    <None Include="Graphviz238\share\man\man3\pathplan.3" />
+    <None Include="Graphviz238\share\man\man3\xdot.3" />
+    <None Include="Graphviz238\share\man\man7\graphviz.7" />
+    <None Include="Graphviz238\share\Thumbs.db" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="icons\pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphviz238\bin\acyclic.exe" />
+    <Content Include="Graphviz238\bin\ann.dll" />
+    <Content Include="Graphviz238\bin\bcomps.exe" />
+    <Content Include="Graphviz238\bin\ccomps.exe" />
+    <Content Include="Graphviz238\bin\cdt.dll" />
+    <Content Include="Graphviz238\bin\cgraph.dll" />
+    <Content Include="Graphviz238\bin\circo.exe" />
+    <Content Include="Graphviz238\bin\dijkstra.exe" />
+    <Content Include="Graphviz238\bin\dot.exe" />
+    <Content Include="Graphviz238\bin\dotty.exe" />
+    <Content Include="Graphviz238\bin\exparse.h" />
+    <Content Include="Graphviz238\bin\fc-cache.exe" />
+    <Content Include="Graphviz238\bin\fc-cat.exe" />
+    <Content Include="Graphviz238\bin\fc-list.exe" />
+    <Content Include="Graphviz238\bin\fc-match.exe" />
+    <Content Include="Graphviz238\bin\fdp.exe" />
+    <Content Include="Graphviz238\bin\fontconfig.dll" />
+    <Content Include="Graphviz238\bin\fontconfig_fix.dll" />
+    <Content Include="Graphviz238\bin\freetype6.dll" />
+    <Content Include="Graphviz238\bin\gc.exe" />
+    <Content Include="Graphviz238\bin\getopt.h" />
+    <Content Include="Graphviz238\bin\glut32.dll" />
+    <Content Include="Graphviz238\bin\gml2gv.exe" />
+    <Content Include="Graphviz238\bin\graphml2gv.exe" />
+    <Content Include="Graphviz238\bin\gv2gml.exe" />
+    <Content Include="Graphviz238\bin\gvc.dll" />
+    <Content Include="Graphviz238\bin\gvcolor.exe" />
+    <Content Include="Graphviz238\bin\gvedit.exe" />
+    <Content Include="Graphviz238\bin\GVedit.html" />
+    <Content Include="Graphviz238\bin\gvgen.exe" />
+    <Content Include="Graphviz238\bin\gvmap.exe" />
+    <Content Include="Graphviz238\bin\gvpack.exe" />
+    <Content Include="Graphviz238\bin\gvplugin_core.dll" />
+    <Content Include="Graphviz238\bin\gvplugin_dot_layout.dll" />
+    <Content Include="Graphviz238\bin\gvplugin_gd.dll" />
+    <Content Include="Graphviz238\bin\gvplugin_gdiplus.dll" />
+    <Content Include="Graphviz238\bin\gvplugin_neato_layout.dll" />
+    <Content Include="Graphviz238\bin\gvplugin_pango.dll" />
+    <Content Include="Graphviz238\bin\gvpr.exe" />
+    <Content Include="Graphviz238\bin\gxl2gv.exe" />
+    <Content Include="Graphviz238\bin\iconv.dll" />
+    <Content Include="Graphviz238\bin\intl.dll" />
+    <Content Include="Graphviz238\bin\jpeg62.dll" />
+    <Content Include="Graphviz238\bin\lefty.exe" />
+    <Content Include="Graphviz238\bin\libatk-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libcairo-2.dll" />
+    <Content Include="Graphviz238\bin\libexpat-1.dll" />
+    <Content Include="Graphviz238\bin\libexpat.dll" />
+    <Content Include="Graphviz238\bin\libfontconfig-1.dll" />
+    <Content Include="Graphviz238\bin\libfreetype-6.dll" />
+    <Content Include="Graphviz238\bin\libgdk-win32-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgdkglext-win32-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgdk_pixbuf-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgio-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libglade-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libglib-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgmodule-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgobject-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgthread-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgtk-win32-2.0-0.dll" />
+    <Content Include="Graphviz238\bin\libgtkglext-win32-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libltdl-3.dll" />
+    <Content Include="Graphviz238\bin\libpango-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libpangocairo-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libpangoft2-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libpangowin32-1.0-0.dll" />
+    <Content Include="Graphviz238\bin\libpng12.dll" />
+    <Content Include="Graphviz238\bin\libpng14-14.dll" />
+    <Content Include="Graphviz238\bin\libxml2.dll" />
+    <Content Include="Graphviz238\bin\lneato.exe" />
+    <Content Include="Graphviz238\bin\ltdl.dll" />
+    <Content Include="Graphviz238\bin\mingle.exe" />
+    <Content Include="Graphviz238\bin\mm2gv.exe" />
+    <Content Include="Graphviz238\bin\neato.exe" />
+    <Resource Include="icons\play_end.png" />
+    <Resource Include="icons\play_fastforward.png" />
+    <Resource Include="icons\play.png" />
+    <Resource Include="icons\play_pause.png" />
+    <Resource Include="icons\stop.png" />
+    <Resource Include="Graphviz238\bin\New Text Document.txt" />
+    <Content Include="Graphviz238\bin\nop.exe" />
+    <Content Include="Graphviz238\bin\osage.exe" />
+    <Content Include="Graphviz238\bin\patchwork.exe" />
+    <Content Include="Graphviz238\bin\Pathplan.dll" />
+    <Resource Include="Graphviz238\bin\props.txt" />
+    <Content Include="Graphviz238\bin\prune.exe" />
+    <Content Include="Graphviz238\bin\QtCore4.dll" />
+    <Content Include="Graphviz238\bin\QtGui4.dll" />
+    <Content Include="Graphviz238\bin\sccmap.exe" />
+    <Content Include="Graphviz238\bin\sfdp.exe" />
+    <Content Include="Graphviz238\bin\smyrna.exe" />
+    <Content Include="Graphviz238\bin\tred.exe" />
+    <Content Include="Graphviz238\bin\twopi.exe" />
+    <Content Include="Graphviz238\bin\unflatten.exe" />
+    <Content Include="Graphviz238\bin\vmalloc.dll" />
+    <Content Include="Graphviz238\bin\zlib1.dll" />
+    <Content Include="Graphviz238\include\graphviz\arith.h" />
+    <Content Include="Graphviz238\include\graphviz\cdt.h" />
+    <Content Include="Graphviz238\include\graphviz\cgraph.h" />
+    <Content Include="Graphviz238\include\graphviz\color.h" />
+    <Content Include="Graphviz238\include\graphviz\geom.h" />
+    <Content Include="Graphviz238\include\graphviz\graph.h" />
+    <Content Include="Graphviz238\include\graphviz\gvc.h" />
+    <Content Include="Graphviz238\include\graphviz\gvcext.h" />
+    <Content Include="Graphviz238\include\graphviz\gvcjob.h" />
+    <Content Include="Graphviz238\include\graphviz\gvcommon.h" />
+    <Content Include="Graphviz238\include\graphviz\gvconfig.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin_device.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin_layout.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin_loadimage.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin_render.h" />
+    <Content Include="Graphviz238\include\graphviz\gvplugin_textlayout.h" />
+    <Content Include="Graphviz238\include\graphviz\gvpr.h" />
+    <Content Include="Graphviz238\include\graphviz\pack.h" />
+    <Content Include="Graphviz238\include\graphviz\pathgeom.h" />
+    <Content Include="Graphviz238\include\graphviz\pathplan.h" />
+    <Content Include="Graphviz238\include\graphviz\textpara.h" />
+    <Content Include="Graphviz238\include\graphviz\textspan.h" />
+    <Content Include="Graphviz238\include\graphviz\types.h" />
+    <Content Include="Graphviz238\include\graphviz\usershape.h" />
+    <Content Include="Graphviz238\include\graphviz\xdot.h" />
+    <Content Include="Graphviz238\lib\debug\dll\ann.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\cdt.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\cgraph.dll" />
+    <Resource Include="Graphviz238\lib\debug\dll\dummyfile.txt" />
+    <Content Include="Graphviz238\lib\debug\dll\gvc.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_core.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_dot_layout.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_gd.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_gdiplus.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_neato_layout.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\gvplugin_pango.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\Pathplan.dll" />
+    <Content Include="Graphviz238\lib\debug\dll\vmalloc.dll" />
+    <Resource Include="Graphviz238\lib\debug\lib\dummyfile.txt" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-arabic-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-arabic-lang.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-basic-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-basic-win32.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-hangul-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-hebrew-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-indic-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-indic-lang.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-khmer-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-syriac-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-thai-fc.dll" />
+    <Content Include="Graphviz238\lib\pango\1.6.0\modules\pango-tibetan-fc.dll" />
+    <Content Include="Graphviz238\lib\release\dll\ann.dll" />
+    <Content Include="Graphviz238\lib\release\dll\cdt.dll" />
+    <Content Include="Graphviz238\lib\release\dll\cgraph.dll" />
+    <Resource Include="Graphviz238\lib\release\dll\dummyfile.txt" />
+    <Content Include="Graphviz238\lib\release\dll\gvc.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_core.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_dot_layout.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_gd.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_gdiplus.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_neato_layout.dll" />
+    <Content Include="Graphviz238\lib\release\dll\gvplugin_pango.dll" />
+    <Content Include="Graphviz238\lib\release\dll\Pathplan.dll" />
+    <Content Include="Graphviz238\lib\release\dll\vmalloc.dll" />
+    <Resource Include="Graphviz238\lib\release\lib\dummyfile.txt" />
+    <Resource Include="Graphviz238\share\graphviz\doc\addingLayout.txt" />
+    <Resource Include="Graphviz238\share\graphviz\doc\cpl1.0.txt" />
+    <Resource Include="Graphviz238\share\graphviz\doc\fontfaq.txt" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\build.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\char.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\FAQ.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\gd.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\Gdtclft2.2.5.example.png" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\GVedit.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\index.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_box.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_crow.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_diamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_dot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_inv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_lbox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_lcrow.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_ldiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_linv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_lnormal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_ltee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_lvee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_none.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_normal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_obox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_odiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_odot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_oinv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_olbox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_oldiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_olinv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_olnormal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_onormal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_orbox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_ordiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_orinv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_ornormal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rbox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rcrow.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rdiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rinv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rnormal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rtee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_rvee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_tee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\aa_vee.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\arrows.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\attrs.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_box.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_crow.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_diamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_dot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_ediamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_empty.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_forward.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_halfopen.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_inv.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_invdot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_invempty.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_invodot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_lteeoldiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_nohead.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_none.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_normal.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_obox.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_odiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_odot.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_open.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\a_tee.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\back.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\both.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\box.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\box3d.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\circle.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\colorlist.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\colors.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\command.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\component.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\constraint.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\diamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\doublecircle.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\doubleoctagon.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\egg.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\ellipse.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\fill.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\folder.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\forward.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\grammar.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\hexagon.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\house.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\html1.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\html2.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\html3.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\html4.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\index.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\invhouse.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\invtrapezium.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\invtriangle.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\lang.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\Mcircle.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\Mdiamond.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\mrecord.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\Msquare.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\nohead.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\none.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\note.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\octagon.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\output.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\parallelogram.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\pentagon.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\plaintext.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\plugins.png" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\point.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\polygon.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\record.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\record2.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\rect.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\rectangle.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\round.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\sdlshapes.png" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\septagon.gif" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\info\shapes.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\tab.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\trapezium.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\triangle.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\info\tripleoctagon.gif" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\pspdf.png" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\schema\arguments.xml" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\schema\attributes.xml" />
+    <Resource Include="Graphviz238\share\graphviz\doc\html\schema\attributes.xslt" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\todo.html" />
+    <Content Include="Graphviz238\share\graphviz\doc\html\winbuild.html" />
+    <Resource Include="Graphviz238\share\graphviz\doc\latex_suggestions.txt" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\arrows.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\awilliams.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\clust3.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\jcctree.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\jsort.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\oldarrows.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\polypoly.gif" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\records.jpg" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\records.png" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\russian.jpg" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\triedds.jpg" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\viewfile.jpg" />
+    <Resource Include="Graphviz238\share\graphviz\graphs\directed\world.gif" />
+    <Resource Include="Graphviz238\share\graphviz\gvedit\attributes.txt" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\2D.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\3D.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\attrs.txt" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\center.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\details.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\edge.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\fish.PNG" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\fisheye.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\fit.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\magnifier.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\mod_3D.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\mod_fisheye.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\mouse_actions.txt" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\move.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\node.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\no_fisheye.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\pan.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\preview.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\rect_select.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\rect_select2.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\rotate.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\zoom.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\zoomin.png" />
+    <Resource Include="Graphviz238\share\graphviz\smyrna\zoomout.png" />
+    <Resource Include="Graphviz238\share\setuplogo.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreAI\CoreAI.csproj">
+      <Project>{c55dd3ac-3d24-4a1f-b4f9-2e804656f9b5}</Project>
+      <Name>CoreAI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Graphviz4Net.Core\Graphviz4Net.Core.csproj">
+      <Project>{903ce537-66bf-4867-be5c-db8958f5e1b3}</Project>
+      <Name>Graphviz4Net.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Graphviz4Net.WPF\Graphviz4Net.WPF.csproj">
+      <Project>{ee5d79d6-d196-4345-a271-dc2e79e26dda}</Project>
+      <Name>Graphviz4Net.WPF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)Graphviz238\bin\*.*" "$(TargetDir)" /D /E /I /F /Y</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
